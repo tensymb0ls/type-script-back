@@ -3,11 +3,11 @@ import fileService from "./fileService.js";
 
 class PostService {
   async create(post, picture) {
-    const fileName = fileService.saveFile(picture);
-    if (picture) {
-      const createdPost = await Post.create({ ...post, picture: fileName });
-      return createdPost;
-    }
+    // const fileName = fileService.saveFile(picture);
+    // if (picture) {
+    //   const createdPost = await Post.create({ ...post, picture: fileName });
+    //   return createdPost;
+    // }
     const createdPost = await Post.create({ ...post });
     return createdPost;
   }
@@ -18,7 +18,7 @@ class PostService {
   }
   async getOne(id) {
     if (!id) {
-      throw new Error("Post id required");
+      throw new Error("Post id is required");
     }
     const post = await Post.findById(id);
     return post;
@@ -26,7 +26,7 @@ class PostService {
 
   async update(post) {
     if (!post._id) {
-      throw new Error("Post id required");
+      throw new Error("Post id is required");
     }
     const updatedPost = await Post.findByIdAndUpdate(post._id, post, {
       new: true,
@@ -36,7 +36,7 @@ class PostService {
 
   async delete(id) {
     if (!id) {
-      throw new Error("Post id required");
+      throw new Error("Post id is required");
     }
     const post = await Post.findByIdAndDelete(id);
     return post;
